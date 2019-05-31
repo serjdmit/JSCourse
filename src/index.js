@@ -46,10 +46,6 @@ function reduce(array, fn, initial) {
         index = 1;
     } else if (array.length === 1) {
         return array[0];
-    } else if (array === [] && initial) {
-        return initial;
-    } else if (array === [] && !initial) {
-        return TypeError;
     }
 
     for (i = index; i < array.length; i++) {
