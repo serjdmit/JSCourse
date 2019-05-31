@@ -8,7 +8,8 @@
  */
 function forEach(array, fn) {
     var i;
-    for(i = 0; i < array.length; i++) {
+
+    for (i = 0; i < array.length; i++) {
         fn(array[i], i, array);
     }
 }
@@ -22,9 +23,11 @@ function forEach(array, fn) {
 function map(array, fn) {
     var i;
     var newArray = [];
-    for(i = 0; i < array.length; i++) {
+
+    for (i = 0; i < array.length; i++) {
         newArray.push(fn(array[i], i, array));
     }
+
     return newArray;
 }
 
@@ -37,21 +40,24 @@ function map(array, fn) {
 function reduce(array, fn, initial) {
     var i;
     var index = 0;
-    if (!initial){
-      initial = array[0];
-      index = 1;
-    } else if (array.length === 1){
+
+    if (!initial) {
+        initial = array[0];
+        index = 1;
+    } else if (array.length === 1) {
         return array[0];
     } else if (array === [] && initial) {
         return initial;
     } else if (array === [] && !initial) {
         return TypeError;
-    };
-    for(i = index; i < array.length; i++){
-      initial = fn(initial, array[i], i, array);
     }
+
+    for (i = index; i < array.length; i++) {
+        initial = fn(initial, array[i], i, array);
+    }
+
     return initial;
-};
+}
 
 /*
  Задание 4:
@@ -65,9 +71,11 @@ function upperProps(obj) {
     var array = Object.getOwnPropertyNames(obj);
     var i;
     var newArray = [];
+
     for (i = 0; i < array.length; i++) {
         newArray.push(array[i].toUpperCase());
     }
+
     return newArray;
 }
 
@@ -81,21 +89,21 @@ function slice(array, from, to) {
     var i;
     var newArray = [];
 
-    if(!from || isNaN(from)) {
+    if (!from || isNaN(from)) {
         from = 0;
     } else if (from < 0) {
         from = array.length + from
     }
 
-    if(!to || to > array.length) {
+    if (!to || to > array.length) {
         to = array.length;
     } else if (to < 0) {
         to = array.length + to
     } else if (isNaN(to)) {
-    	to = 0;
+        to = 0;
     }
 
-    for (i = from; i < to; i++){
+    for (i = from; i < to; i++) {
         newArray.push(array[i]);
     }
 
