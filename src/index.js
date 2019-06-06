@@ -123,12 +123,7 @@ function returnBadArguments(fn) {
    - number не является числом (с текстом "number is not a number")
    - какой-либо из аргументов div является нулем (с текстом "division by 0")
  */
-function calculator(number = 0) {
-    var object = {};
-
-    function sum(){
-        
-    }
+function calculator() {
 }
 
 /* При решении задач, пострайтесь использовать отладчик */
