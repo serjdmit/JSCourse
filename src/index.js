@@ -25,6 +25,7 @@ function isAllTrue(array, fn) {
 
     var bool = 0;
     var i;
+
     for (i = 0; i < array.length; i++) {
         if ( fn(array[i]) === false) {
             bool++;
@@ -33,9 +34,9 @@ function isAllTrue(array, fn) {
 
     if (bool > 0) {
         return false;
-    } else {
-        return true;
     }
+
+    return true;
 }
 
 /*
@@ -63,6 +64,7 @@ function isSomeTrue(array, fn) {
 
     var bool = 0;
     var i;
+
     for (i = 0; i < array.length; i++) {
         if ( fn(array[i]) === true) {
             bool++;
@@ -71,9 +73,9 @@ function isSomeTrue(array, fn) {
 
     if (bool > 0) {
         return true;
-    } else {
-        return false;
     }
+    
+    return false;
 }
 
 /*
@@ -98,7 +100,7 @@ function returnBadArguments(fn) {
     for (i = 1; i < arguments.length; i++) {
         try {
             fn(arguments[i]);  
-        } catch(e) {
+        } catch (e) {
             array.push(arguments[i]);
         }
     }
@@ -127,37 +129,42 @@ function calculator(number = 0) {
     var i;
 
     if ( typeof number != 'number' ) {
-        throw "number is not a number";
+        throw 'number is not a number';
     }
     
     function sum() {
         for (i = 0; i < arguments.length; i++) {
             number = number + arguments[i];
         }
+
         return number;
     }
     function dif() {
         for (i = 0; i < arguments.length; i++) {
             number = number - arguments[i];
         }
+
         return number;
     }
     function div() {
         for (i = 0; i < arguments.length; i++) {
             if (arguments[i] === 0) {
-                throw "division by 0"
+                throw 'division by 0'
             }
             number = number / arguments[i];
         }
+
         return number;
     }
     function mul() {
         for (i = 0; i < arguments.length; i++) {
             number = number * arguments[i];
         }
+
         return number;
     }
-    return {sum: sum, dif: dif, div: div, mul: mul}
+
+    return { sum: sum, dif: dif, div: div, mul: mul }
 }
 
 /* При решении задач, пострайтесь использовать отладчик */
