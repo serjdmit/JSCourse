@@ -12,6 +12,7 @@
  */
 function createDivWithText(text) {
     const element = document.createElement('div');
+
     element.textContent = text;
 
     return element;
@@ -126,12 +127,18 @@ function deleteTextNodes(where) {
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
-    var elements = where.querySelectorAll('*');
-    console.log(elements);
+    for (var i = 0; i < where.childNodes.length; i++) {
+        var node = where.childNodes[i];
+        
+        if (node.nodeType === 3) {
+            node.remove();
+            i--;
+        }
 
-    Array.from(elements).forEach((child) => {
-        var inners = child.querySelectorAll('*');
-    });
+        if (node.nodeType === 1 && node.childNodes.length) {
+            deleteTextNodesRecursive(node);
+        }
+    }
 
     return where;
 }
