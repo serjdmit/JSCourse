@@ -69,8 +69,26 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
-filterInput.addEventListener('keyup', function() {
-    // это обработчик нажатия кливиш в текстовом поле
+filterInput.addEventListener('keyup', () => {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json');
+    xhr.responseType = 'json';
+    xhr.send();
+    xhr.addEventListener('load', () => {
+        const towns = xhr.response;
+				
+        filterResult.innerHTML = '';
+    		for (const town of towns) {
+        		const full = town.name.toLowerCase();
+            const chunk = filterInput.value.toLowerCase();
+
+            if (full.includes(chunk)){
+            	filterResult.append(town.name + '\n');
+            }
+            
+        }
+    });
 });
 
 export {
