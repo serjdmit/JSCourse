@@ -70,25 +70,19 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
 filterInput.addEventListener('keyup', () => {
-    const xhr = new XMLHttpRequest();
+    filterResult.innerHTML = '';
 
-    xhr.open('GET', 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json');
-    xhr.responseType = 'json';
-    xhr.send();
-    xhr.addEventListener('load', () => {
-        const towns = xhr.response;
-				
-        filterResult.innerHTML = '';
-    		for (const town of towns) {
-        		const full = town.name.toLowerCase();
-            const chunk = filterInput.value.toLowerCase();
+    if(filterInput.value) {
+        loadAndSortTowns().then( towns => { 
+            for (const town of towns) {
+                const filteredTown = isMatching(town.name, filterInput.value);
 
-            if (full.includes(chunk)){
-            	filterResult.append(town.name + '\n');
+                if(filteredTown) {
+                    filterResult.appendChild(town.name);
+                };
             }
-            
-        }
-    });
+        });
+    }
 });
 
 export {
