@@ -69,21 +69,46 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
-filterInput.addEventListener('keyup', () => {
-    filterResult.innerHTML = '';
+// filterInput.addEventListener('keyup', () => {
+//     filterResult.innerHTML = '';
 
-    if(filterInput.value) {
-        loadAndSortTowns().then( towns => { 
-            for (const town of towns) {
-                const filteredTown = isMatching(town.name, filterInput.value);
+//     if(filterInput.value) {
+//         loadAndSortTowns().then( towns => { 
+//             for (const town of towns) {
+//                 const filteredTown = isMatching(town.name, filterInput.value);
 
-                if(filteredTown) {
-                    filterResult.appendChild(town.name);
-                };
+//                 if(filteredTown) {
+//                     filterResult.appendChild(town.name);
+//                 };
+//             }
+//         });
+//     }
+// });
+
+loadTowns().then(sortTowns => {
+    filterBlock.style.display = 'block';
+    loadingBlock.style.display = 'none';
+
+    filterInput.addEventListener('keyup', function (event) {
+        let chunk = event.target.value;
+        
+        filterResult.innerHTML = '';
+        for (let index = 0; index < sortTowns.length; index++) {
+            const element = sortTowns[index].name;
+            
+            if (isMatching(element, chunk)) {
+                let div = document.createElement('div');
+
+                div.textContent = element;
+                filterResult.appendChild(div);
             }
-        });
-    }
-});
+        }
+
+        if (!chunk) {
+            filterResult.innerHTML = '';
+        }
+    });
+})
 
 export {
     loadTowns,
