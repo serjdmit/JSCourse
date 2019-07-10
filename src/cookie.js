@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function getCookie() {
     const cookie = document.cookie;
 
-    if(cookie) {
+    if (cookie) {
         return cookie.split('; ').reduce((prev, current) => {
             const [name, value] = current.split('=');
 
